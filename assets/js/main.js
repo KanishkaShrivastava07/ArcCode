@@ -117,9 +117,16 @@
         createContentItemHTML: function(item, type) {
             const metadata = this.getMetadataHTML(item, type);
             
+            // Determine the correct path based on current location
+            const currentPath = window.location.pathname;
+            let linkPath = `${type}/${item.filename}`;
+            if (currentPath.includes('/problems/') || currentPath.includes('/concepts/') || currentPath.includes('/articles/')) {
+                linkPath = `../${type}/${item.filename}`;
+            }
+            
             return `
                 <div class="content-item" data-type="${type}" ${this.getDataAttributes(item, type)}>
-                    <h3><a href="/${type}/${item.filename}">${item.title}</a></h3>
+                    <h3><a href="${linkPath}">${item.title}</a></h3>
                     <div class="content-metadata">
                         ${metadata}
                     </div>

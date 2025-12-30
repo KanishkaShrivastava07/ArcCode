@@ -7,8 +7,14 @@
     'use strict';
 
     const ContentIndexer = {
-        // Configuration
-        configPath: './contributor-config.json',
+        // Get the correct config path based on current location
+        getConfigPath: function() {
+            const currentPath = window.location.pathname;
+            if (currentPath.includes('/problems/') || currentPath.includes('/concepts/') || currentPath.includes('/articles/')) {
+                return '../contributor-config.json';
+            }
+            return './contributor-config.json';
+        },
         
         // Cache for loaded configuration
         configCache: null,
@@ -41,7 +47,8 @@
             }
 
             try {
-                const response = await fetch(this.configPath);
+                const configPath = this.getConfigPath();
+                const response = await fetch(configPath);
                 if (!response.ok) {
                     throw new Error(`Failed to load config: ${response.status}`);
                 }
@@ -59,10 +66,17 @@
         validateContentItems: async function(items, contentType) {
             const validatedItems = [];
             
+            // Determine the correct path prefix based on current location
+            const currentPath = window.location.pathname;
+            let pathPrefix = './';
+            if (currentPath.includes('/problems/') || currentPath.includes('/concepts/') || currentPath.includes('/articles/')) {
+                pathPrefix = '../';
+            }
+            
             for (const item of items) {
                 try {
                     // Check if the file exists by attempting to fetch its metadata
-                    const filePath = `./${contentType}/${item.filename}`;
+                    const filePath = `${pathPrefix}${contentType}/${item.filename}`;
                     const response = await fetch(filePath, { method: 'HEAD' });
                     
                     if (response.ok) {
@@ -112,9 +126,16 @@
 
         // Basic content item HTML (fallback if main.js not loaded)
         createBasicContentItemHTML: function(item, type) {
+            // Determine the correct path based on current location
+            const currentPath = window.location.pathname;
+            let linkPath = `${type}/${item.filename}`;
+            if (currentPath.includes('/problems/') || currentPath.includes('/concepts/') || currentPath.includes('/articles/')) {
+                linkPath = `../${type}/${item.filename}`;
+            }
+            
             return `
                 <div class="content-item">
-                    <h3><a href="/${type}/${item.filename}">${item.title}</a></h3>
+                    <h3><a href="${linkPath}">${item.title}</a></h3>
                     <p>By ${item.author} • ${new Date(item.dateAdded).toLocaleDateString()}</p>
                 </div>
             `;
