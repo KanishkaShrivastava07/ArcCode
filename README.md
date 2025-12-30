@@ -15,7 +15,7 @@ A static, community-driven programming knowledge and problem platform that combi
 ## 🚀 Quick Start
 
 ### For Users
-1. Visit the live site: [https://your-username.github.io/codeprob](https://your-username.github.io/codeprob)
+1. Visit the live site: [Click Here](https://codeprob.github.io/CodeProb)
 2. Browse problems, concepts, and articles
 3. Use the Writer interface to create new content
 4. Submit contributions via GitHub pull requests
