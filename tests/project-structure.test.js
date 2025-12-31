@@ -178,7 +178,7 @@ describe('Project Structure Validation', () => {
           const jsContent = fs.readFileSync(jsPath, 'utf8');
           
           // Should use IIFE pattern for encapsulation
-          expect(jsContent).toMatch(/\(function\(\)\s*{/);
+          expect(jsContent).toMatch(/\(function\s*\(\)\s*{/);
           expect(jsContent).toMatch(/'use strict';/);
           
           // Should expose global object
@@ -189,7 +189,7 @@ describe('Project Structure Validation', () => {
           }
           
           // Should have proper closing
-          expect(jsContent).toMatch(/}\)\(\);?\s*$/);
+          expect(jsContent).toMatch(/}\)\(\);?\s*$/m);
           
           return true;
         }

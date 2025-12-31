@@ -192,11 +192,10 @@
             }
 
             return attributes.join(' ');
-        }
-    },
+        },
 
         // Setup profile linking for static pages
-        setupProfileLinking: async function() {
+        setupProfileLinking: async function () {
             try {
                 // Determine path to profiles.json based on location
                 let prefix = './';
@@ -234,14 +233,14 @@
                 console.warn('Profile linking skipped:', e);
             }
         }
-};
+    };
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function () {
-    CodeProb.init();
-});
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+        CodeProb.init();
+    });
 
-// Make CodeProb available globally
-window.CodeProb = CodeProb;
+    // Make CodeProb available globally
+    window.CodeProb = CodeProb;
 
-}) ();
+})();
