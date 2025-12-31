@@ -851,8 +851,24 @@
                     if (data.socials && data.socials.trim()) {
                         socialHTML = '<div class="social-links">';
                         data.socials.split('\n').filter(s => s.trim()).forEach(link => {
-                            const [label, url] = link.includes(':') ? link.split(':', 2) : ['Link', link];
-                            socialHTML += `<a href="${url.trim()}" target="_blank" class="social-btn">${label.trim()}</a>`;
+                            let label = 'Link';
+                            let url = link.trim();
+
+                            // Robust split on first colon only
+                            const firstColonIndex = link.indexOf(':');
+                            if (firstColonIndex !== -1) {
+                                label = link.substring(0, firstColonIndex).trim();
+                                url = link.substring(firstColonIndex + 1).trim();
+                            }
+
+                            // Auto-fix URL if it looks like a domain but lacks protocol
+                            // If it starts with http/https/mailto, leave it.
+                            // If it doesn't, assume https:// unless it's obviously just a label (which would be weird here)
+                            if (url && !url.match(/^[a-zA-Z]+:/)) {
+                                url = 'https://' + url;
+                            }
+
+                            socialHTML += `<a href="${url}" target="_blank" class="social-btn">${label}</a>`;
                         });
                         socialHTML += '</div>';
                     }
