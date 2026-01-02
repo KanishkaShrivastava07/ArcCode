@@ -192,8 +192,56 @@
 
                         <div class="form-group">
                             <label for="problem-description">Problem Description *</label>
-                            <textarea id="problem-description" name="description" required
-                                placeholder="Describe the problem clearly. What should the function do? What are the constraints?"></textarea>
+
+                            <!-- Advanced Wiki-style Writer for Problem -->
+                            <div class="advanced-writer" id="problem-advanced-writer">
+                                <div class="writer-toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="bold"
+                                            title="Bold"><strong>B</strong></button>
+                                        <button type="button" data-action="italic" title="Italic"><em>I</em></button>
+                                        <button type="button" data-action="code" title="Inline Code">`</button>
+                                    </div>
+                                    <span class="toolbar-separator">|</span>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="h2" title="Heading 2">H2</button>
+                                        <button type="button" data-action="h3" title="Heading 3">H3</button>
+                                    </div>
+                                    <span class="toolbar-separator">|</span>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="ul" title="Bullet List">• List</button>
+                                        <button type="button" data-action="ol" title="Numbered List">1. List</button>
+                                    </div>
+                                    <span class="toolbar-separator">|</span>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="code-block" title="Code Block">{ }</button>
+                                    </div>
+                                    <div class="toolbar-spacer" style="flex: 1;"></div>
+                                    <div class="toolbar-group">
+                                        <button type="button" class="fullscreen-toggle" title="Toggle Fullscreen">
+                                            <span>⛶</span> Fullscreen
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="writer-body">
+                                    <div class="writer-editor-pane">
+                                        <div class="pane-label">
+                                            <span>Editor</span>
+                                            <span id="problem-word-count">0 words</span>
+                                        </div>
+                                        <textarea id="problem-description" name="description" class="writer-textarea"
+                                            required placeholder="Describe the problem clearly..."></textarea>
+                                        <div class="writer-status-bar">
+                                            <span id="problem-save-status">Draft saved locally</span>
+                                            <span>Markdown Enabled</span>
+                                        </div>
+                                    </div>
+                                    <div class="writer-preview-pane">
+                                        <div class="pane-label">Wiki Preview</div>
+                                        <div id="problem-preview" class="writer-preview-content"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -265,8 +313,50 @@ Explanation: Empty array returns 0"></textarea>
 
                         <div class="form-group">
                             <label for="concept-overview">Overview *</label>
-                            <textarea id="concept-overview" name="overview" required
-                                placeholder="Brief introduction to the concept. What is it and why is it important?"></textarea>
+
+                            <!-- Advanced Wiki-style Writer for Concept -->
+                            <div class="advanced-writer" id="concept-advanced-writer">
+                                <div class="writer-toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="bold"
+                                            title="Bold"><strong>B</strong></button>
+                                        <button type="button" data-action="italic" title="Italic"><em>I</em></button>
+                                    </div>
+                                    <span class="toolbar-separator">|</span>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="h2" title="Heading 2">H2</button>
+                                        <button type="button" data-action="h3" title="Heading 3">H3</button>
+                                    </div>
+                                    <span class="toolbar-separator">|</span>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="ul" title="Bullet List">• List</button>
+                                    </div>
+                                    <div class="toolbar-spacer" style="flex: 1;"></div>
+                                    <div class="toolbar-group">
+                                        <button type="button" class="fullscreen-toggle" title="Toggle Fullscreen">
+                                            <span>⛶</span> Fullscreen
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="writer-body">
+                                    <div class="writer-editor-pane">
+                                        <div class="pane-label">
+                                            <span>Editor</span>
+                                            <span id="concept-word-count">0 words</span>
+                                        </div>
+                                        <textarea id="concept-overview" name="overview" class="writer-textarea" required
+                                            placeholder="Brief introduction to the concept..."></textarea>
+                                        <div class="writer-status-bar">
+                                            <span id="concept-save-status">Draft saved locally</span>
+                                            <span>Markdown Enabled</span>
+                                        </div>
+                                    </div>
+                                    <div class="writer-preview-pane">
+                                        <div class="pane-label">Wiki Preview</div>
+                                        <div id="concept-preview" class="writer-preview-content"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -324,60 +414,54 @@ Python:
                         <div class="form-group">
                             <label for="article-content">Article Content *</label>
 
-                            <!-- Markdown Toolbar -->
-                            <div id="markdown-toolbar" class="markdown-toolbar">
-                                <button type="button" data-action="bold" title="Bold">**B**</button>
-                                <button type="button" data-action="italic" title="Italic">*I*</button>
-                                <button type="button" data-action="code" title="Inline Code">`</button>
-                                <button type="button" data-action="link" title="Link">🔗</button>
-                                <button type="button" data-action="image" title="Image">🖼️</button>
-                                <span class="toolbar-separator">|</span>
-                                <button type="button" data-action="h1" title="Heading 1">H1</button>
-                                <button type="button" data-action="h2" title="Heading 2">H2</button>
-                                <button type="button" data-action="h3" title="Heading 3">H3</button>
-                                <span class="toolbar-separator">|</span>
-                                <button type="button" data-action="ul" title="Bullet List">• List</button>
-                                <button type="button" data-action="ol" title="Numbered List">1. List</button>
-                                <button type="button" data-action="quote" title="Quote">❝</button>
-                                <span class="toolbar-separator">|</span>
-                                <button type="button" data-action="code-block" title="Code Block">{ }</button>
-                                <button type="button" data-action="highlight" title="Highlight">==H==</button>
-                                <button type="button" data-action="strikethrough" title="Strikethrough">~~S~~</button>
-                                <button type="button" data-action="hr" title="Horizontal Rule">---</button>
-                            </div>
-
-                            <!-- Split Pane Editor -->
-                            <div class="markdown-editor">
-                                <div class="editor-pane">
-                                    <div class="pane-header">Editor</div>
-                                    <textarea id="article-content" name="content" required placeholder="Write your article content here using Markdown syntax:
-
-# Main Heading
-## Subheading
-
-**Bold text** and *italic text*
-
-[Link text](https://example.com)
-
-```javascript
-// Code blocks with syntax highlighting
-console.log('Hello, world!');
-```
-
-- Bullet points
-- More items
-
-> Blockquotes for important notes
-
-==Highlighted text== and ~~strikethrough~~
-
----
-
-Images: ![Alt text](image-url)"></textarea>
+                            <!-- Advanced premium Wiki-style Writer -->
+                            <div class="advanced-writer" id="article-advanced-writer">
+                                <div class="writer-toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="bold"
+                                            title="Bold"><strong>B</strong></button>
+                                        <button type="button" data-action="italic" title="Italic"><em>I</em></button>
+                                        <button type="button" data-action="code" title="Inline Code">`</button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="h1" title="Heading 1">H1</button>
+                                        <button type="button" data-action="h2" title="Heading 2">H2</button>
+                                        <button type="button" data-action="h3" title="Heading 3">H3</button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="ul" title="Bullet List">List</button>
+                                        <button type="button" data-action="ol" title="Numbered List">1.</button>
+                                        <button type="button" data-action="quote" title="Quote">"</button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" data-action="link" title="Link">Lnk</button>
+                                        <button type="button" data-action="image" title="Image">Img</button>
+                                        <button type="button" data-action="table" title="Table">Tbl</button>
+                                    </div>
+                                    <div class="toolbar-spacer" style="flex: 1;"></div>
+                                    <div class="toolbar-group">
+                                        <button type="button" class="fullscreen-toggle" title="Toggle Fullscreen">
+                                            <span>⛶</span> Fullscreen
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="preview-pane">
-                                    <div class="pane-header">Live Preview</div>
-                                    <div id="live-preview" class="live-preview-content"></div>
+                                <div class="writer-body">
+                                    <div class="writer-editor-pane">
+                                        <div class="pane-label">
+                                            <span>Editor</span>
+                                            <span id="article-word-count">0 words</span>
+                                        </div>
+                                        <textarea id="article-content" name="content" class="writer-textarea" required
+                                            placeholder="Start writing your masterpiece..."></textarea>
+                                        <div class="writer-status-bar">
+                                            <span id="article-save-status">Draft saved locally</span>
+                                            <span>Markdown Enabled</span>
+                                        </div>
+                                    </div>
+                                    <div class="writer-preview-pane">
+                                        <div class="pane-label">Wiki Preview</div>
+                                        <div id="live-preview" class="writer-preview-content"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -451,9 +535,9 @@ Portfolio: https://mysite.com"></textarea>
                     <button type="button" class="btn" id="clear-btn">Clear Form</button>
                 </div>
 
-                <div id="preview-area" class="preview-area">
+                <div id="inline-preview-area" class="preview-area">
                     <h3>Preview</h3>
-                    <div id="preview-content"></div>
+                    <div id="inline-preview-content"></div>
                 </div>
             </div>
         </div>
@@ -468,7 +552,20 @@ Portfolio: https://mysite.com"></textarea>
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <!-- Premium Global Preview Modal -->
+    <div id="global-preview-modal">
+        <button class="close-preview">✕ Close Preview</button>
+        <div class="preview-modal-content">
+            <div id="modal-preview-content"></div>
+        </div>
+    </div>
+
     <script src="assets/js/writer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof Writer !== 'undefined') Writer.init();
+        });
+    </script>
 </body>
 
 </html>

@@ -45,6 +45,16 @@
                 this.showPreview();
             });
 
+            // Close modal events
+            const closeBtn = document.querySelector('.close-preview');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.closePreview());
+            }
+
+            document.getElementById('global-preview-modal')?.addEventListener('click', (e) => {
+                if (e.target.id === 'global-preview-modal') this.closePreview();
+            });
+
             document.getElementById('export-btn').addEventListener('click', () => {
                 this.exportContent();
             });
@@ -53,74 +63,98 @@
                 this.clearCurrentForm();
             });
 
-            // Setup markdown toolbar
-            this.setupMarkdownToolbar();
-
-            // Setup live preview for article content
-            this.setupLivePreview();
+            // Setup Advanced Writer
+            this.setupAdvancedWriter();
         },
 
-        // Setup markdown toolbar functionality
-        setupMarkdownToolbar: function () {
-            const toolbar = document.getElementById('markdown-toolbar');
-            if (!toolbar) return;
+        // Setup Advanced Writer functionality
+        setupAdvancedWriter: function () {
+            const writers = document.querySelectorAll('.advanced-writer');
 
-            toolbar.addEventListener('click', (e) => {
-                if (e.target.dataset.action) {
-                    this.insertMarkdown(e.target.dataset.action);
+            writers.forEach(writer => {
+                const id = writer.id;
+                const toolbar = writer.querySelector('.writer-toolbar');
+                const textarea = writer.querySelector('.writer-textarea');
+                const preview = writer.querySelector('.writer-preview-content');
+                const fullscreenBtn = writer.querySelector('.fullscreen-toggle');
+                const wordCountEl = writer.querySelector('[id$="-word-count"]');
+                const saveStatusEl = writer.querySelector('[id$="-save-status"]');
+
+                // Load from localStorage
+                if (textarea) {
+                    const savedDraft = localStorage.getItem(`codeprob_draft_${id}`);
+                    if (savedDraft) {
+                        textarea.value = savedDraft;
+                    }
+                }
+
+                if (toolbar) {
+                    toolbar.addEventListener('click', (e) => {
+                        const btn = e.target.closest('button');
+                        if (btn && btn.dataset.action) {
+                            this.insertMarkdown(btn.dataset.action, textarea);
+                        }
+                    });
+                }
+
+                if (textarea && preview) {
+                    const updateUI = () => {
+                        this.updateAdvancedPreview(textarea, preview);
+
+                        // Word Count
+                        if (wordCountEl) {
+                            const words = textarea.value.trim() ? textarea.value.trim().split(/\s+/).length : 0;
+                            wordCountEl.textContent = `${words} words`;
+                        }
+
+                        // Auto-Save
+                        localStorage.setItem(`codeprob_draft_${id}`, textarea.value);
+                        if (saveStatusEl) {
+                            saveStatusEl.textContent = `Draft saved at ${new Date().toLocaleTimeString()}`;
+                        }
+                    };
+
+                    textarea.addEventListener('input', updateUI);
+
+                    // Initial render
+                    this.updateAdvancedPreview(textarea, preview);
+
+                    // Sync scroll
+                    textarea.addEventListener('scroll', () => {
+                        const scrollPct = textarea.scrollTop / (textarea.scrollHeight - textarea.clientHeight);
+                        preview.scrollTop = scrollPct * (preview.scrollHeight - preview.clientHeight);
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        const isFullscreen = writer.classList.toggle('fullscreen');
+                        document.body.classList.toggle('writer-is-fullscreen', isFullscreen);
+
+                        fullscreenBtn.innerHTML = isFullscreen ?
+                            '<span>✕</span> Close' :
+                            '<span>⛶</span> Fullscreen';
+                    });
                 }
             });
         },
 
-        // Setup live preview for article content
-        setupLivePreview: function () {
-            const contentTextarea = document.getElementById('article-content');
-            const referencesTextarea = document.getElementById('article-references');
-            const livePreview = document.getElementById('live-preview');
+        // Update preview for advanced writer
+        updateAdvancedPreview: function (textarea, preview) {
+            const content = textarea.value;
+            let previewHTML = `
+                <section class="content">
+                    ${this.processContent(content)}
+                </section>
+            `;
 
-            if (contentTextarea && livePreview) {
-                const updatePreview = () => {
-                    const content = contentTextarea.value;
-                    const references = referencesTextarea ? referencesTextarea.value : '';
-
-                    let previewHTML = '';
-
-                    // Main content section
-                    if (content) {
-                        previewHTML += `
-                            <section class="content">
-                                ${this.processContent(content)}
-                            </section>
-                        `;
-                    }
-
-                    // References section
-                    if (references && references.trim()) {
-                        previewHTML += `
-                            <section class="references">
-                                <h2>References and Further Reading</h2>
-                                ${this.processRelatedLinks(references)}
-                            </section>
-                        `;
-                    }
-
-                    livePreview.innerHTML = previewHTML;
-                };
-
-                // Listen to both content and references fields
-                contentTextarea.addEventListener('input', updatePreview);
-                if (referencesTextarea) {
-                    referencesTextarea.addEventListener('input', updatePreview);
-                }
-
-                // Initial render
-                updatePreview();
-            }
+            // If it's an article with references, you might want to handle it specifically
+            // but for a generic modular editor, just process the content.
+            preview.innerHTML = previewHTML;
         },
 
         // Insert markdown syntax at cursor position
-        insertMarkdown: function (action) {
-            const textarea = document.getElementById('article-content');
+        insertMarkdown: function (action, textarea) {
             if (!textarea) return;
 
             const start = textarea.selectionStart;
@@ -135,59 +169,55 @@
             switch (action) {
                 case 'bold':
                     insertText = `**${selectedText || 'bold text'}**`;
-                    cursorOffset = selectedText ? 0 : -9;
+                    cursorOffset = selectedText ? 0 : -2;
                     break;
                 case 'italic':
                     insertText = `*${selectedText || 'italic text'}*`;
-                    cursorOffset = selectedText ? 0 : -12;
+                    cursorOffset = selectedText ? 0 : -1;
                     break;
                 case 'code':
                     insertText = `\`${selectedText || 'code'}\``;
-                    cursorOffset = selectedText ? 0 : -5;
+                    cursorOffset = selectedText ? 0 : -1;
                     break;
                 case 'link':
                     insertText = `[${selectedText || 'link text'}](url)`;
-                    cursorOffset = selectedText ? -4 : -13;
+                    cursorOffset = selectedText ? -5 : -5;
                     break;
                 case 'image':
                     insertText = `![${selectedText || 'alt text'}](image-url)`;
-                    cursorOffset = selectedText ? -12 : -21;
+                    cursorOffset = selectedText ? -11 : -11;
                     break;
                 case 'h1':
-                    insertText = `# ${selectedText || 'Heading 1'}`;
-                    cursorOffset = selectedText ? 0 : -10;
+                    insertText = `\n# ${selectedText || 'Heading 1'}\n`;
+                    cursorOffset = 0;
                     break;
                 case 'h2':
-                    insertText = `## ${selectedText || 'Heading 2'}`;
-                    cursorOffset = selectedText ? 0 : -10;
+                    insertText = `\n## ${selectedText || 'Heading 2'}\n`;
+                    cursorOffset = 0;
                     break;
                 case 'h3':
-                    insertText = `### ${selectedText || 'Heading 3'}`;
-                    cursorOffset = selectedText ? 0 : -10;
+                    insertText = `\n### ${selectedText || 'Heading 3'}\n`;
+                    cursorOffset = 0;
                     break;
                 case 'ul':
-                    insertText = `- ${selectedText || 'List item'}`;
-                    cursorOffset = selectedText ? 0 : -9;
+                    insertText = `\n- ${selectedText || 'List item'}`;
+                    cursorOffset = 0;
                     break;
                 case 'ol':
-                    insertText = `1. ${selectedText || 'List item'}`;
-                    cursorOffset = selectedText ? 0 : -9;
+                    insertText = `\n1. ${selectedText || 'List item'}`;
+                    cursorOffset = 0;
                     break;
                 case 'quote':
-                    insertText = `> ${selectedText || 'Quote'}`;
-                    cursorOffset = selectedText ? 0 : -5;
+                    insertText = `\n> ${selectedText || 'Quote'}`;
+                    cursorOffset = 0;
                     break;
                 case 'code-block':
-                    insertText = `\`\`\`javascript\n${selectedText || 'code here'}\n\`\`\``;
-                    cursorOffset = selectedText ? 0 : -13;
+                    insertText = `\n\`\`\`javascript\n${selectedText || 'code here'}\n\`\`\`\n`;
+                    cursorOffset = 0;
                     break;
-                case 'highlight':
-                    insertText = `==${selectedText || 'highlighted text'}==`;
-                    cursorOffset = selectedText ? 0 : -18;
-                    break;
-                case 'strikethrough':
-                    insertText = `~~${selectedText || 'strikethrough'}~~`;
-                    cursorOffset = selectedText ? 0 : -15;
+                case 'table':
+                    insertText = `\n| Header 1 | Header 2 |\n| -------- | -------- |\n| Cell 1   | Cell 2   |\n`;
+                    cursorOffset = 0;
                     break;
                 case 'hr':
                     insertText = '\n---\n';
@@ -202,7 +232,7 @@
             textarea.setSelectionRange(newCursorPos, newCursorPos);
             textarea.focus();
 
-            // Trigger live preview update
+            // Trigger preview update
             textarea.dispatchEvent(new Event('input'));
         },
 
@@ -639,6 +669,41 @@
             // Blockquotes
             html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
 
+            // Tables (Basic GitHub Flavored Markdown style)
+            html = html.replace(/\n((?:\|.*\|(?:\n|$))+)/g, (match, tableContent) => {
+                const rows = tableContent.trim().split('\n');
+                if (rows.length < 2) return match;
+
+                // Helper to split row into cells
+                const splitRow = (row) => {
+                    const cells = row.split('|');
+                    if (cells[0] === '') cells.shift();
+                    if (cells[cells.length - 1] === '') cells.pop();
+                    return cells.map(c => c.trim());
+                };
+
+                const headerRow = splitRow(rows[0]);
+                const bodyRows = rows.slice(2); // Skip separator row
+
+                let tableHtml = '<table><thead><tr>';
+                headerRow.forEach(cell => {
+                    tableHtml += `<th>${cell}</th>`;
+                });
+                tableHtml += '</tr></thead><tbody>';
+
+                bodyRows.forEach(row => {
+                    const cells = splitRow(row);
+                    tableHtml += '<tr>';
+                    for (let i = 0; i < headerRow.length; i++) {
+                        tableHtml += `<td>${cells[i] || ''}</td>`;
+                    }
+                    tableHtml += '</tr>';
+                });
+
+                tableHtml += '</tbody></table>';
+                return tableHtml;
+            });
+
             // Horizontal rules
             html = html.replace(/^---$/gm, '<hr>');
             html = html.replace(/^\*\*\*$/gm, '<hr>');
@@ -740,36 +805,42 @@
                 return;
             }
 
-            const previewArea = document.getElementById('preview-area');
-            const previewContent = document.getElementById('preview-content');
+            const modal = document.getElementById('global-preview-modal');
+            const previewContent = document.getElementById('modal-preview-content');
+
+            if (!modal || !previewContent) {
+                console.error('Preview modal elements not found');
+                return;
+            }
+
+            // Clear previous content to ensure refresh
+            previewContent.innerHTML = '';
 
             let html = this.generateHTML(data, true);
 
-            // Extract just the article content for preview
+            // Extract the core content for the modal preview
             const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const mainContent = doc.querySelector('main');
 
-            // For profile, render the whole thing as it's a structural page
-            if (this.currentTab === 'profile') {
-                const doc = parser.parseFromString(html, 'text/html');
-                const article = doc.querySelector('.profile-container');
-                if (article) {
-                    previewContent.innerHTML = article.outerHTML;
-                } else {
-                    previewContent.innerHTML = '<p>Preview not available for profile</p>';
-                }
+            if (mainContent) {
+                previewContent.innerHTML = mainContent.innerHTML;
             } else {
-                const doc = parser.parseFromString(html, 'text/html');
-                const article = doc.querySelector('article');
-
-                if (article) {
-                    previewContent.innerHTML = article.outerHTML;
-                } else {
-                    previewContent.innerHTML = '<p>Preview not available</p>';
-                }
+                previewContent.innerHTML = '<p>Preview not available</p>';
             }
 
-            previewArea.classList.add('active');
-            previewArea.scrollIntoView({ behavior: 'smooth' });
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            modal.scrollTop = 0;
+        },
+
+        // Close global preview modal
+        closePreview: function () {
+            const modal = document.getElementById('global-preview-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         },
 
         // Generate complete HTML from form data
@@ -986,16 +1057,18 @@ IMPORTANT:
                 const form = document.getElementById(`${this.currentTab}-form`);
                 form.reset();
 
-                const previewArea = document.getElementById('preview-area');
-                previewArea.classList.remove('active');
+                const previewArea = document.getElementById('inline-preview-area');
+                if (previewArea) previewArea.classList.remove('active');
+
+                const previewContent = document.getElementById('inline-preview-content');
+                if (previewContent) previewContent.innerHTML = '';
+
+                const modalPreviewContent = document.getElementById('modal-preview-content');
+                if (modalPreviewContent) modalPreviewContent.innerHTML = '';
             }
         }
     };
 
-    // Initialize when DOM is ready
-    document.addEventListener('DOMContentLoaded', function () {
-        Writer.init();
-    });
 
     // Make Writer available globally for debugging
     window.Writer = Writer;
