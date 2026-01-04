@@ -23,6 +23,14 @@
         "complexity": "beginner",
         "author": "CodeProb Team",
         "dateAdded": "2024-01-01"
+      },
+      {
+        "filename": "loop-increment-with-step-size-i-n.html",
+        "title": "Nth access concept",
+        "category": "fundamentals",
+        "complexity": "beginner",
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2024-01-04"
       }
     ],
     "articles": [
