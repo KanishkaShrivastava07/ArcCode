@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop increment with step size (i += n) - CodeProb</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title"><a href="../index.html">CodeProb</a></h1>
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../problems/index.html" class="nav-link">Problems</a>
+                <a href="index.html" class="nav-link nav-link--active">Concepts</a>
+                <a href="../articles/index.html" class="nav-link">Articles</a>
+                <a href="../writer.html" class="nav-link nav-link--writer">Write</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="container">
+            <article class="concept" data-id="loop-increment-with-step-size-i-n" data-category="fundamentals">
+                <header>
+                    <h1>Loop increment with step size (i += n)</h1>
+                    <div class="metadata">
+                        <span class="category">Fundamentals</span>
+                        <span class="difficulty">Beginner</span>
+                    </div>
+                </header>
+                <section class="overview">
+                    <h2>Overview</h2>
+                    <p>This is commonly used when we need to process every Nth character instead of every character.</p>
+                </section>
+                <section class="explanation">
+                    <h2>Detailed Explanation</h2>
+                    <p>In programming, loops usually move one step at a time using i++ </p>
+<p>using i += n increases the loop variable by n on each iteration</p>
+<p>this helps us directly access every Nth element without unnecessary checks</p><p>How it works ->
+<p>the loop starts from index 0</p>
+<p>on each iteration, the index jumps by n</p>
+<p>the loop stops when the index exceeds the string length</p><p>When to use ->
+<p>selecting every Nth character from a string</p>
+<p>skipping elements in arrays</p>
+<p>optimizing loops by avoiding unnecessary iterations</p><p>Key benefit ->
+<p>cleaner code</p>
+<p>better performance</p>
+                </section>
+                <section class="examples">
+                    <h2>Code Examples</h2>
+                    <pre><code class="language-java">for (int i = 0; i &lt; str.length(); i += n) {</p>
+<p>    // process every Nth character</p>
+<p>}</p>
+<p></code></pre>
+                </section>
+                <section class="related-problems">
+                    <h2>Practice Problems</h2>
+                    <p>No related content available.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 CodeProb. A static, community-driven platform hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
