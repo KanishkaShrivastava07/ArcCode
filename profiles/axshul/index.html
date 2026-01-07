@@ -16,6 +16,7 @@
                 <a href="../../problems/index.html" class="nav-link">Problems</a>
                 <a href="../../concepts/index.html" class="nav-link">Concepts</a>
                 <a href="../../articles/index.html" class="nav-link">Articles</a>
+                <a href="../../blogs/index.html" class="nav-link">Blogs</a>
                 <a href="../../writer.html" class="nav-link">Write</a>
             </nav>
         </div>
@@ -40,12 +41,16 @@
                     <span class="stat-label">Problems</span>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-value" id="count-concepts">0</span>
+                    <span class="stat-label">Concepts</span>
+                </div>
+                <div class="stat-item">
                     <span class="stat-value" id="count-articles">0</span>
                     <span class="stat-label">Articles</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value" id="count-concepts">0</span>
-                    <span class="stat-label">Concepts</span>
+                    <span class="stat-value" id="count-blogs">0</span>
+                    <span class="stat-label">Blogs</span>
                 </div>
             </div>
 
@@ -66,8 +71,9 @@
                 <div class="profile-tabs">
                     <button class="profile-tab-btn active" data-type="all">All</button>
                     <button class="profile-tab-btn" data-type="problems">Problems</button>
-                    <button class="profile-tab-btn" data-type="articles">Articles</button>
                     <button class="profile-tab-btn" data-type="concepts">Concepts</button>
+                    <button class="profile-tab-btn" data-type="articles">Articles</button>
+                    <button class="profile-tab-btn" data-type="blogs">Blogs</button>
                 </div>
                 <div id="contributions-list" class="content-list">
                     <p>Loading contributions...</p>
@@ -107,18 +113,21 @@
                 };
 
                 processItems(config.content.problems, 'problems');
-                processItems(config.content.articles, 'articles');
                 processItems(config.content.concepts, 'concepts');
+                processItems(config.content.articles, 'articles');
+                processItems(config.content.blogs, 'blogs');
 
                 const updateStats = () => {
                     const counts = {
                         problems: allContent.filter(i => i.type === 'problems').length,
+                        concepts: allContent.filter(i => i.type === 'concepts').length,
                         articles: allContent.filter(i => i.type === 'articles').length,
-                        concepts: allContent.filter(i => i.type === 'concepts').length
+                        blogs: allContent.filter(i => i.type === 'blogs').length
                     };
                     document.getElementById('count-problems').textContent = counts.problems;
-                    document.getElementById('count-articles').textContent = counts.articles;
                     document.getElementById('count-concepts').textContent = counts.concepts;
+                    document.getElementById('count-articles').textContent = counts.articles;
+                    document.getElementById('count-blogs').textContent = counts.blogs;
                 };
 
                 updateStats();

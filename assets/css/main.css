@@ -1982,11 +1982,23 @@ textarea:focus {
     border: 1px solid var(--border-color);
 }
 
+.profile-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
 .stat-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
+    min-width: 80px;
 }
 
 .stat-value {
@@ -2006,6 +2018,7 @@ textarea:focus {
     gap: 0.5rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
 }
 
 .profile-tab-btn {
@@ -2017,6 +2030,7 @@ textarea:focus {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s ease;
+    font-size: 0.875rem;
 }
 
 .profile-tab-btn:hover {
@@ -2030,8 +2044,21 @@ textarea:focus {
 
 .content-type-badge {
     text-transform: capitalize;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: inline-block;
 }
 
+.content-type-badge {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-light);
+}
+
+/* Responsive profile stats */
 @media (max-width: 600px) {
     .profile-header {
         flex-direction: column;
@@ -2040,16 +2067,27 @@ textarea:focus {
     }
     
     .profile-stats {
-        gap: 0.5rem;
+        gap: 0.75rem;
         padding: 0.75rem;
+        justify-content: space-around;
+    }
+    
+    .stat-item {
+        min-width: 70px;
     }
     
     .stat-value {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
     }
     
     .profile-tab-btn {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8125rem;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .profile-tabs {
+        gap: 0.25rem;
     }
 }
