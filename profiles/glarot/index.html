@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glarot - CodeProb Profile</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title"><a href="../../index.html">CodeProb</a></h1>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+            <nav class="main-nav">
+                <a href="../../problems/index.html" class="nav-link">Problems</a>
+                <a href="../../concepts/index.html" class="nav-link">Concepts</a>
+                <a href="../../articles/index.html" class="nav-link">Articles</a>
+                <a href="../../blogs/index.html" class="nav-link">Blogs</a>
+                <a href="../../writer.html" class="nav-link">Write</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="container profile-container" data-username="glarot" data-display-name="Glarot">
+            <header class="profile-header">
+                <img src="https://picsum.photos/200/300" alt="Glarot" class="profile-avatar"
+                    onerror="this.src='../../assets/images/default-profile.png'">
+                <div class="profile-info">
+                    <h1>Glarot ⚔️</h1>
+                    <div class="profile-tagline">Gladiator from the Roman Hein Era | Aggressive Coder | Code Warrior
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/glarot" target="_blank" class="social-btn">GitHub</a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="count-problems">0</span>
+                    <span class="stat-label">Problems</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="count-concepts">0</span>
+                    <span class="stat-label">Concepts</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="count-articles">0</span>
+                    <span class="stat-label">Articles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="count-blogs">0</span>
+                    <span class="stat-label">Blogs</span>
+                </div>
+            </div>
+
+            <section class="profile-bio">
+                <h2>About</h2>
+                <div class="bio-content">
+                    <p><strong>⚔️ GLAROT - THE CODE GLADIATOR ⚔️</strong></p>
+
+                    <p>From the legendary arenas of the Roman Hein Era, I emerged not just as a warrior of the sword,
+                        but as a warrior of code. Where others saw battles, I saw algorithms. Where they saw blood,
+                        I saw binary.</p>
+
+                    <p><strong>🏛️ My Creed:</strong></p>
+                    <p>"In the arena of programming, there are no second chances. Every line of code is a strike,
+                        every bug is an opponent, and every successful deployment is a victory worthy of the Colosseum!"
+                    </p>
+
+                    <p><strong>⚡ Fighting Style:</strong></p>
+                    <p>I code with the aggression of a gladiator charging into battle. No problem is too complex,
+                        no algorithm too daunting. I attack code challenges with the same ferocity my ancestors
+                        brought to the arena. Fast, brutal, efficient.</p>
+
+                    <p><strong>🛡️ Weapons of Choice:</strong></p>
+                    <ul>
+                        <li>JavaScript - My primary gladius, swift and deadly</li>
+                        <li>Python - The trident of versatility</li>
+                        <li>Algorithms - My shield against chaos</li>
+                        <li>Data Structures - The armor that protects my logic</li>
+                    </ul>
+
+                    <p><strong>🏆 Battle Philosophy:</strong></p>
+                    <p>"Code or die. Debug or fall. Optimize or perish. In the Colosseum of programming,
+                        only the aggressive survive. The timid get runtime errors. The bold get production deployments."
+                    </p>
+
+                    <p><strong>⚔️ War Cry:</strong></p>
+                    <p><em>"ARE YOU NOT COMPILED?!"</em></p>
+
+                    <p>I bring the spirit of ancient Rome to modern development. Every commit is a conquest.
+                        Every pull request is a triumph. Every code review is a gladiatorial duel.</p>
+
+                    <p>Join me in the arena, fellow warriors. Let's conquer bugs, vanquish errors, and build
+                        empires of code that would make Caesar himself jealous!</p>
+
+                    <p style="text-align: center; margin-top: 2rem;">
+                        <strong>🗡️ VENI, VIDI, CODI 🗡️</strong><br>
+                        <em>(I came, I saw, I coded)</em>
+                    </p>
+                </div>
+            </section>
+
+            <section class="profile-section">
+                <h2>Contributions</h2>
+                <div class="profile-tabs">
+                    <button class="profile-tab-btn active" data-type="all">All</button>
+                    <button class="profile-tab-btn" data-type="problems">Problems</button>
+                    <button class="profile-tab-btn" data-type="concepts">Concepts</button>
+                    <button class="profile-tab-btn" data-type="articles">Articles</button>
+                    <button class="profile-tab-btn" data-type="blogs">Blogs</button>
+                </div>
+                <div id="contributions-list" class="content-list">
+                    <p>Loading contributions...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 CodeProb. A static, community-driven platform hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('contributions-list');
+            const profileContainer = document.querySelector('.profile-container');
+            const username = profileContainer.dataset.username;
+            const displayName = profileContainer.dataset.displayName;
+            const tabBtns = document.querySelectorAll('.profile-tab-btn');
+
+            let allContent = [];
+
+            try {
+                const response = await fetch('../../contributor-config.json');
+                const config = await response.json();
+
+                const processItems = (items, type) => {
+                    if (!items) return;
+                    items.forEach(item => {
+                        if (item.author.toLowerCase() === displayName.toLowerCase() ||
+                            item.author.toLowerCase() === username.toLowerCase()) {
+                            item.type = type;
+                            allContent.push(item);
+                        }
+                    });
+                };
+
+                processItems(config.content.problems, 'problems');
+                processItems(config.content.concepts, 'concepts');
+                processItems(config.content.articles, 'articles');
+                processItems(config.content.blogs, 'blogs');
+
+                const updateStats = () => {
+                    const counts = {
+                        problems: allContent.filter(i => i.type === 'problems').length,
+                        concepts: allContent.filter(i => i.type === 'concepts').length,
+                        articles: allContent.filter(i => i.type === 'articles').length,
+                        blogs: allContent.filter(i => i.type === 'blogs').length
+                    };
+                    document.getElementById('count-problems').textContent = counts.problems;
+                    document.getElementById('count-concepts').textContent = counts.concepts;
+                    document.getElementById('count-articles').textContent = counts.articles;
+                    document.getElementById('count-blogs').textContent = counts.blogs;
+                };
+
+                updateStats();
+
+                const renderContent = (type = 'all') => {
+                    const filtered = type === 'all' ? allContent : allContent.filter(i => i.type === type);
+                    if (filtered.length === 0) {
+                        container.innerHTML = '<p>No ' + (type === 'all' ? '' : type) + ' contributions found yet. The gladiator prepares for battle...</p>';
+                        return;
+                    }
+                    filtered.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+                    container.innerHTML = filtered.map(item =>
+                        '<div class="content-item">' +
+                        '<span class="content-type-badge">' + item.type.slice(0, -1) + '</span>' +
+                        '<h3><a href="../../' + item.type + '/' + item.filename + '">' + item.title + '</a></h3>' +
+                        '<div class="content-metadata">' +
+                        '<span>' + item.dateAdded + '</span>' +
+                        '</div>' +
+                        '</div>'
+                    ).join('');
+                };
+
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        renderContent(btn.dataset.type);
+                    });
+                });
+
+                renderContent();
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<p>Error loading contributions.</p>';
+            }
+        });
+    </script>
+</body>
+
+</html>
