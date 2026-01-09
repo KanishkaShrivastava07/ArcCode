@@ -13,18 +13,6 @@
         ],
         "author": "CodeProb Team",
         "dateAdded": "2024-01-01"
-      },
-      {
-        "filename": " problem-tokenize-a-sentence.html",
-        "title": "Tokenize a Sentence",
-        "difficulty": "easy",
-        "topics": [
-          "java",
-          "strings",
-          "stringtokenizer"
-        ],
-        "author": "Kanishka Shrivastava",
-        "dateAdded": "2026-01-09"
       }
     ],
     "concepts": [
