@@ -59,10 +59,11 @@ body {
     --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.5);
     --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.6);
     
-    /* Professional Typography */
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-    --font-serif: 'Georgia', 'Times New Roman', serif;
+    /* Premium Typography */
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
+    --font-sans: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-serif: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
+    --font-display: 'Space Grotesk', 'Inter', sans-serif;
 
     /* Enhanced Spacing and Layout */
     --spacing-xs: 0.25rem;
@@ -99,8 +100,12 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 15px;
     margin: 0;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Container and Layout */
@@ -123,22 +128,25 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.2;
     margin: 0 0 0.5em 0;
     color: var(--text-primary);
+    letter-spacing: -0.02em;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.3rem;
     margin-bottom: 1rem;
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 1.875rem;
+    font-weight: 600;
     border-bottom: 1px solid var(--border-light);
     padding-bottom: 0.125rem;
     margin-top: 1.5rem;
@@ -146,7 +154,8 @@ h2 {
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -171,17 +180,36 @@ p {
     color: var(--text-secondary);
 }
 
+/* Enhanced Mobile Responsiveness */
 @media (max-width: 640px) {
-    h1 {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .site-title {
         font-size: 1.5rem;
     }
-
-    h2 {
+    
+    .hero h2 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+    
+    .hero p {
+        font-size: 1.125rem;
+        max-width: 100%;
+    }
+    
+    .category-card h3 {
         font-size: 1.25rem;
     }
-
-    h3 {
-        font-size: 1.1rem;
+    
+    .category-card p {
+        font-size: 0.9375rem;
     }
 }
 
@@ -301,13 +329,15 @@ li {
 }
 
 .site-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
+    font-family: var(--font-display);
     margin: 0;
     background: linear-gradient(135deg, var(--link-color), var(--accent-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.03em;
 }
 
 .site-title a {
@@ -475,22 +505,25 @@ li {
 }
 
 .hero h2 {
-    font-size: 2rem;
+    font-size: 2.25rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.75rem;
     border-bottom: none;
-    font-weight: 700;
+    font-family: var(--font-display);
     background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .hero p {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 80%;
+    line-height: 1.5;
+    max-width: 85%;
+    font-weight: 400;
 }
 
 /* Content Categories - Enhanced Card Style */
@@ -565,9 +598,10 @@ li {
 
 .category-card h3 {
     margin-bottom: 0.75rem;
-    font-size: 1.375rem;
+    font-size: 1.5rem;
     border-bottom: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: var(--font-display);
 }
 
 .category-card h3 a {
@@ -583,7 +617,11 @@ li {
 
 .category-card p {
     margin: 0;
-    font-size: 0.9375rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 400;
+}
     line-height: 1.5;
     color: var(--text-muted);
 }
@@ -2219,10 +2257,26 @@ body.writer-is-fullscreen {
     }
 }
 
-/* Desktop and Larger (1025px+) */
-@media (min-width: 1025px) {
-    .category-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+/* Desktop Enhancement */
+@media (min-width: 1200px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .hero h2 {
+        font-size: 2.75rem;
+    }
+    
+    .hero p {
+        font-size: 1.375rem;
+    }
+    
+    .category-card h3 {
+        font-size: 1.625rem;
+    }
+    
+    .category-card p {
+        font-size: 1.125rem;
     }
 }
 
