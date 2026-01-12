@@ -1,7 +1,7 @@
 /* CodeProb - Professional Dark Wikipedia Theme */
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Sora:wght@400;500;600;700&display=swap');
 
 /* CSS Reset and Base Styles */
 * {
@@ -64,9 +64,9 @@ body {
     
     /* Premium Typography */
     --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
-    --font-sans: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-sans: 'Sora', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     --font-serif: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
-    --font-display: 'Space Grotesk', 'Inter', sans-serif;
+    --font-display: 'Space Grotesk', 'Sora', sans-serif;
 
     /* Enhanced Spacing and Layout */
     --spacing-xs: 0.25rem;
@@ -389,37 +389,46 @@ li {
 }
 
 @media (max-width: 640px) {
-    .main-nav {
-        display: none;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 64px);
-        background-color: var(--bg-secondary);
-        flex-direction: column;
-        padding: 1rem 0;
-        z-index: 1000;
-        overflow-y: auto;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    .site-header {
+        height: auto;
+        padding: 0.75rem 0;
     }
 
-    .main-nav.nav--open {
+    .site-header .container {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .main-nav {
         display: flex !important;
+        position: static;
+        width: 100%;
+        height: auto;
+        background: transparent;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0.5rem;
+        padding: 0.25rem 0;
+        box-shadow: none;
     }
 
     .nav-link {
-        width: 100%;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid var(--border-light);
-        text-align: left;
+        width: auto;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border-light);
+        text-align: center;
+        border-radius: 999px;
+        white-space: nowrap;
+        min-height: 40px;
     }
 
     .nav-link--writer {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-        text-align: center;
-        border-radius: 6px;
+        margin: 0;
     }
 }
 
