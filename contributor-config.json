@@ -43,6 +43,14 @@
         "complexity": "beginner",
         "author": "Kanishka Shrivastava",
         "dateAdded": "2026-01-05"
+      },
+      {
+        "filename": "jmm.html",
+        "title": "Java memory model",
+        "category": "best practices",
+        "complexity": "advanced",
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2026-01-13"
       }
     ],
     "articles": [
