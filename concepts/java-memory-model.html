@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Memory Model - CodeProb</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title"><a href="../index.html">CodeProb</a></h1>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../problems/index.html" class="nav-link">Problems</a>
+                <a href="index.html" class="nav-link nav-link--active">Concepts</a>
+                <a href="../articles/index.html" class="nav-link">Articles</a>
+                <a href="../writer.html" class="nav-link nav-link--writer">Write</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="container">
+            <article class="concept" data-id="java-memory-model" data-category="best-practices">
+                <header>
+                    <h1>Java Memory Model</h1>
+                    <div class="metadata">
+                        <span class="category">Best-practices</span>
+                        <span class="difficulty">Advanced</span>
+                    </div>
+                </header>
+                <section class="overview">
+                    <h2>Overview</h2>
+                    <p>The Java Memory Model defines how threads interact through shared memory and specifies the rules that govern visibility, ordering, and atomicity of variables in multithreaded Java programs.</p>
+<p>It explains when changes made by one thread become visible to another and how the JVM and CPU may reorder instructions for performance. Without understanding JMM, multithreaded programs may show unpredictable behavior, even if the code appears correct.</p>
+                </section>
+                <section class="explanation">
+                    <h2>Detailed Explanation</h2>
+                    <p>-> Key Characteristics</p>
+<p>Defines how threads share data in memory</p>
+<p>Controls visibility and ordering of variables</p>
+<p>Introduces the happens-before rule</p>
+<p>Helps prevent concurrency bugs</p><p>->How It Works</p>
+<p>Each thread may keep its own copy of variables.</p>
+<p>Because of this, changes made by one thread may not be visible to another.</p>
+<p>The Java Memory Model sets rules to ensure that memory changes become visible using tools like volatile and synchronized.</p><p>->When to Use It</p>
+<p>While writing multithreaded programs</p>
+<p>When threads share variables</p>
+<p>For thread-safe code</p>
+                </section>
+                <section class="examples">
+                    <h2>Code Examples</h2>
+                    <p>``<code>java </p>
+<p>class Task {</p>
+<p>    volatile boolean running = true;</p>
+<p>}</p><p>class Treasure {</p>
+<p>    private int points = 0;</p><p>    synchronized void increment() {</p>
+<p>        points++;</p>
+<p>    }</p>
+<p>}</p>
+<p></code>``</p>
+                </section>
+                <section class="related-problems">
+                    <h2>Practice Problems</h2>
+                    <p>No related content available.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 CodeProb. A static, community-driven platform hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
