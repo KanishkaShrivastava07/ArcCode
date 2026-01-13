@@ -15,17 +15,17 @@
         "dateAdded": "2024-01-01"
       },
       {
-     "filename": "problem-tokenize.html",
-     "title": "Tokenize a Sentence",
-     "difficulty": "easy",
-     "topics": [
-     "java",
-     "strings",
-     "stringtokenizer"
-     ],
-     "author": "Kanishka Shrivastava",
-     "dateAdded": "2026-01-09"
-   }
+        "filename": "problem-tokenize.html",
+        "title": "Tokenize a Sentence",
+        "difficulty": "easy",
+        "topics": [
+          "java",
+          "strings",
+          "stringtokenizer"
+        ],
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2026-01-09"
+      }
     ],
     "concepts": [
       {
@@ -80,6 +80,19 @@
         ],
         "author": "CodeProb Team",
         "dateAdded": "2026-01-07",
+        "readTime": "5 min read"
+      },
+      {
+        "filename": "my-journey-from-syntax-to-superpowers.html",
+        "title": "My Journey: From Syntax to Superpowers",
+        "tags": [
+          "personal",
+          "career",
+          "learning",
+          "advice"
+        ],
+        "author": "Anshul Namdev",
+        "dateAdded": "2026-01-13",
         "readTime": "5 min read"
       }
     ]
