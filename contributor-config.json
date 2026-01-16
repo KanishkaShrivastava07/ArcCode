@@ -25,6 +25,18 @@
         ],
         "author": "Kanishka Shrivastava",
         "dateAdded": "2026-01-09"
+      },
+      {
+        "filename": "problem-syracuse-collatz-sequence.html",
+        "title": "Syracuse (Collatz) Sequence",
+        "difficulty": "easy",
+        "topics": [
+          "loops",
+          "if-else",
+          "patterns"
+        ],
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2026-01-16"
       }
     ],
     "concepts": [
