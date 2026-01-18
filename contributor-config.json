@@ -63,6 +63,14 @@
         "complexity": "advanced",
         "author": "Kanishka Shrivastava",
         "dateAdded": "2026-01-13"
+      },
+      {
+        "filename": "jvm-architecture.html",
+        "title": "JVM Architecture (Java Virtual Machine)",
+        "category": "fundamentals",
+        "complexity": "intermediate",
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2026-01-18"
       }
     ],
     "articles": [
