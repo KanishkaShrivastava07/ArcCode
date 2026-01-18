@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JVM Architecture | CodeProb</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Learn JVM Architecture in Java with simple explanation, memory structure, execution engine, and examples. Perfect for beginners and interview preparation.">
+    <meta name="keywords" content="JVM Architecture, Java Virtual Machine, JVM Memory, Java Internals, CodeProb Java Concepts">
+    <meta name="author" content="Kanishka Shrivastava">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <h1 class="site-title">
+            <a href="../index.html">CodeProb</a>
+        </h1>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+            ☰
+        </button>
+
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../problems/index.html" class="nav-link">Problems</a>
+            <a href="index.html" class="nav-link nav-link--active">Concepts</a>
+            <a href="../articles/index.html" class="nav-link">Articles</a>
+            <a href="../writer.html" class="nav-link nav-link--writer">Write</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="container">
+
+        <article class="concept" data-id="jvm-architecture" data-category="fundamentals">
+
+            <!-- Header -->
+            <header class="concept-header">
+                <h1>JVM Architecture</h1>
+                <div class="metadata">
+                    <span class="category">Fundamentals</span>
+                    <span class="difficulty">Intermediate</span>
+                </div>
+            </header>
+
+            <!-- Overview -->
+            <section class="overview">
+                <h2>Overview</h2>
+                <p>
+                    JVM Architecture explains how Java programs are executed internally. It defines how classes are loaded, how memory is managed, and how bytecode is converted into machine-level instructions. Understanding JVM Architecture helps developers improve performance, manage memory efficiently, and debug runtime issues.
+                </p>
+            </section>
+
+            <!-- Explanation -->
+            <section class="explanation">
+                <h2>Detailed Explanation</h2>
+
+                <p>
+                    The Java Virtual Machine (JVM) is an abstract machine that executes Java bytecode. It allows the same compiled Java program to run on different operating systems without modification.
+                </p>
+
+                <h3>Main Components of JVM</h3>
+                <ul>
+                    <li>Class Loader Subsystem</li>
+                    <li>Runtime Data Areas (Memory)</li>
+                    <li>Execution Engine</li>
+                </ul>
+
+                <h3>Key Characteristics</h3>
+                <ul>
+                    <li>Platform independent execution</li>
+                    <li>Automatic garbage collection</li>
+                    <li>Secure runtime environment</li>
+                    <li>Multithreaded execution support</li>
+                    <li>High performance using JIT compiler</li>
+                </ul>
+
+                <h3>1. Class Loader Subsystem</h3>
+                <p>Responsible for loading Java class files into memory.</p>
+
+                <ul>
+                    <li><strong>Loading:</strong> Reads class bytecode</li>
+                    <li><strong>Linking:</strong> Verifies and prepares memory</li>
+                    <li><strong>Initialization:</strong> Executes static blocks</li>
+                </ul>
+
+                <h3>2. Runtime Data Areas</h3>
+
+                <h4>Method Area</h4>
+                <p>Stores class metadata, static variables, and method information.</p>
+
+                <h4>Heap Area</h4>
+                <p>Stores objects and instance variables. Managed by Garbage Collector.</p>
+
+                <h4>Stack Area</h4>
+                <p>Stores method calls and local variables. Works on LIFO principle.</p>
+
+                <h4>PC Register</h4>
+                <p>Keeps track of current instruction execution.</p>
+
+                <h3>3. Execution Engine</h3>
+
+                <ul>
+                    <li><strong>Interpreter:</strong> Executes bytecode line by line</li>
+                    <li><strong>JIT Compiler:</strong> Converts bytecode into native machine code</li>
+                    <li><strong>Garbage Collector:</strong> Removes unused objects automatically</li>
+                </ul>
+
+                <h3>Execution Flow</h3>
+                <ol>
+                    <li>Java source code compiled into bytecode</li>
+                    <li>Class Loader loads class</li>
+                    <li>Bytecode verifier checks security</li>
+                    <li>Execution Engine executes program</li>
+                    <li>Garbage Collector manages memory</li>
+                </ol>
+
+            </section>
+
+            <!-- Code Example -->
+            <section class="examples">
+                <h2>Simple Java Example</h2>
+
+                <pre><code class="language-java">
+class Demo {
+
+    public static void main(String[] args) {
+
+        int x = 10;          // Stored in Stack
+        Student s = new Student();  // Object stored in Heap
+
+        s.show();
+    }
+}
+
+class Student {
+
+    void show() {
+        System.out.println("Hello JVM");
+    }
+}
+                </code></pre>
+
+                <p>
+                    <strong>Explanation:</strong> Local variables and method calls are stored in Stack memory, while objects created using <code>new</code> keyword are stored in Heap memory.
+                </p>
+
+            </section>
+
+            <!-- Resources -->
+            <section class="related-problems">
+                <h2>Learning Resources</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/java/how-jvm-works-jvm-architecture/" target="_blank" rel="noopener">
+                            GeeksforGeeks — JVM Architecture Explained
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.tutorialspoint.com/java/java_jvm.htm" target="_blank" rel="noopener">
+                            TutorialsPoint — JVM Architecture Guide
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.javatpoint.com/jvm-java-virtual-machine" target="_blank" rel="noopener">
+                            Javatpoint — JVM Overview
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2025 CodeProb — Community Driven Programming Platform</p>
+    </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>
