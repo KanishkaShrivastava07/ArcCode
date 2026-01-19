@@ -37,6 +37,19 @@
         ],
         "author": "Kanishka Shrivastava",
         "dateAdded": "2026-01-16"
+      },
+      {
+        "filename": "problem-bank-account-balance-manager.html",
+        "title": "Bank Account Balance Manager",
+        "difficulty": "medium",
+        "topics": [
+          "oop",
+          "classes",
+          "methods",
+          "encapsulation"
+        ],
+        "author": "Kanishka Shrivastava",
+        "dateAdded": "2026-01-19"
       }
     ],
     "concepts": [
